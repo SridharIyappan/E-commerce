@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema({
   },
   productInStock: {
     type: Number,
-    require: true,
+    required: true,
   },
   productDeliveryOption: {
     type: Boolean,
@@ -46,6 +46,14 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  ProductBuyersCount: {
+      type: Number,
+      required: true
+  },
+  productRating: {
+      type: Number,
+      required: true,
+  }
 });
 
 export const Products = mongoose.model("products", productSchema);
