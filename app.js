@@ -1,8 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
+import bodyParser from 'body-parser';
 import cors from "cors";
 import dotenv from "dotenv";
 
+//
+import errorMiddleWare from "./Middleware/error.js";
+// const errorMiddleWare = require('./Middleware/error');
+//
 import {connectDb} from "./Middleware/dbConnection.js";
 
 import userRouter from './Routes/userRoutes.js'
@@ -25,14 +30,16 @@ const cYear = date.getFullYear() + 2;
 
 const app = express();
 app.use(cors());
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json({extended: true}));
+app.use(errorMiddleWare);
 
 app.use('/api', userRouter);
 
 // Server Listen
 app.listen(port, () =>
   console.log(
-    `http://localhost:${port}, env port ${process.env.PORT}`
+    `http://localhost:${port}, on ${process.env.NODE_ENV} mode`
   )
 );
