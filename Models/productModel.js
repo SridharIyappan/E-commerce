@@ -2,58 +2,87 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
   supplierId: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  name: {
     type: String,
     required: true,
   },
-  productType: {
+  category: {
     type: String,
     required: true,
+    enum: {
+      values: [
+        "Electronics",
+        "Camera",
+        "Accessories",
+        "Headphones",
+        "Books",
+        "Laptops",
+        "Food",
+        "Clothes",
+        "Shoes",
+        "Beauty",
+        "Health",
+        "Sports",
+        "Fitness",
+      ],
+    },
   },
-  productName: {
-    type: String,
-    required: true,
-  },
-  produtCategory: {
-    type: String,
-    required: true,
-  },
-  productImage: {
+  image: {
     type: Array,
     required: true,
   },
-  productMrpPrice: {
+  mrpPrice: {
     type: Number,
   },
-  productSalePrice: {
-    type: Number,
-    required: true,
-  },
-  productSpecification: {
-    type: String,
-  },
-  productDescription: {
-    type: String,
-  },
-  productInStock: {
+  salePrice: {
     type: Number,
     required: true,
   },
-  productDeliveryOption: {
+  specification: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  stock: {
+    type: Number,
+    required: true,
+  },
+  deliveryOption: {
     type: Boolean,
     required: true,
   },
-  productShow: {
-    type: Boolean,
+  buyersCount: {
+    type: Number,
+    default: 0,
+  },
+  rating: {
+    type: Number,
+    default: 0,
+  },
+  productHideDate: {
+    type: Date,
     required: true,
   },
-  ProductBuyersCount: {
-      type: Number,
-      required: true
+  show: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
-  productRating: {
-      type: Number,
-      required: true,
-  }
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-export const Products = mongoose.model("products", productSchema);
+const Products = mongoose.model("products", productSchema);
+
+export default Products;

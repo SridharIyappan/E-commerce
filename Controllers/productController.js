@@ -24,7 +24,7 @@ export const createProduct = async (req, res, next) => {
       }
     }
     if (supplier.supplierLevel === 2) {
-      if (productsCount.length >= 5) {
+      if (productsCount.length >= 2) {
         return next(
           new ErrorHandler("You are unable to create more then 2 products", 401)
         );
